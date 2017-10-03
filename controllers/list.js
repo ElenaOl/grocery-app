@@ -24,10 +24,32 @@ request(
         }
       }, 
       function (error, response, body) {
-        console.log(body);
+       // console.log(body);
       }
     )
   }
 );
+
+
+// GET - return a page with mylist
+router.get('/', function(req, res) {
+  console.log("this is from sessions: ", req.session);
+   //get everything from list db and render page.
+  db.list.findAll().then(function(items) {
+    res.render('lists/item', {items: items});
+  }).catch(function(err) {
+    res.status(500).render('error');
+  });
+});
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
