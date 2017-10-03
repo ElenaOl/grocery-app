@@ -1,0 +1,21 @@
+<h1>Add new item to your list</h1>
+
+<form action="/list" method="POST">
+  <div class="form-group">
+    <label for="itemName">Item name</label>
+    <input type="text" class="form-control" id="itemName" name="itemName" required>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <textarea type="integer" class="form-control" id="amount" name="amount" required></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Created by</label>
+    <textarea type="text" class="form-control" id="userId" name="" required></textarea>
+  </div>
+
+  <input type="submit" class="btn btn-primary">
+</form>
+

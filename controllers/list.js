@@ -36,15 +36,71 @@ router.get('/', function(req, res) {
   console.log("this is from sessions: ", req.session);
    //get everything from list db and render page.
   db.list.findAll().then(function(items) {
-    res.render('lists/item', {items: items});
+    console.log("those are my items from the list: ", items);
+    res.render('lists/show', {items: items});
   }).catch(function(err) {
     res.status(500).render('error');
+  });
+});
+
+// POST /lists - create a new list
+router.post('/', function(req, res) {
+  db.list.create({
+    itemName: req.body.itemName,
+    amount: req.body.amount,
+    userId: req.body.userId
+  }).then(function(item){
+  //here item is what db returned from create
+    console.log('created ', item.itemName);
+    res.redirect('/');
+  }).catch(function(err) {
+    res.status(500).render('error');
+  });
+});
+
+// GET /list/addItem - display form for creating new posts
+router.get('/addItem', function(req, res) {
+  db.list.findAll()
+  .then(function() {
+    res.render('lists/addItem');
+  })
+  .catch(function(error) {
+    res.status(400).render('main/404');
   });
 });
 
 
 
 
+
+
+
+
+// // POST - receive the name of an item and add it to the database
+// router.post('/', function(req, res) {
+//   // add to database, adding raw to a table
+
+//   var itemName = req.body.itemName;
+//   db.list.findOne({
+//     where:{
+//       itemName: itemName
+//     }
+//   }).then(function(item){
+//     //item is the result of my query
+//     if(item === null){
+//       db.list.create({
+//         itemName: itemName
+//       }).then(function(item){
+//         //here item is what db returned from create
+//         console.log('created ', item.itemName);
+//         res.redirect('/list');
+//       });
+//     }else{
+//       console.log('already exist: ', item.itemName);
+//       res.redirect('/list');
+//     }
+//   });
+// });
 
 
 
