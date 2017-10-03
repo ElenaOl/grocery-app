@@ -9,7 +9,7 @@ var session = require('express-session');
 var flash = require('connect-flash');
 // require the authorization middleware at the top of the page
 var isLoggedIn = require('./middleware/isLoggedIn');
-var request = require('request');
+
 
 
 app.set('view engine', 'ejs');

@@ -1,3 +1,8 @@
+var express = require('express');
+var request = require('request');
+var router = express.Router();
+var db = require('../models');
+
 var food = 'cucumber';
 request(
   'http://api.edamam.com/api/food-database/parser?ingr=' + food + '&app_id=63f7abc8&app_key=2738e46d31b312ca0e39c9dca251c866&page=0',
@@ -24,3 +29,5 @@ request(
     )
   }
 );
+
+module.exports = router;
