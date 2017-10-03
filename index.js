@@ -9,6 +9,7 @@ var session = require('express-session');
 var flash = require('connect-flash');
 // require the authorization middleware at the top of the page
 var isLoggedIn = require('./middleware/isLoggedIn');
+var request = require('request');
 
 
 app.set('view engine', 'ejs');
@@ -48,7 +49,6 @@ var passport = require('./config/ppConfig');
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.get('/', function(req, res) {
   res.render('index');
 });
@@ -58,6 +58,7 @@ app.get('/profile', isLoggedIn, function(req, res) {
 });
 
 app.use('/auth', require('./controllers/auth'));
+app.use('/list', require('./controllers/list'));
 
 var server = app.listen(process.env.PORT || 3000);
 
