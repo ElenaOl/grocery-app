@@ -87,7 +87,8 @@ router.delete('/:itemName', function(req, res){
   });
 });
 
-router.put('/:itemName/edit', function(req, res){
+//editing item
+router.put('/edit/:itemName', function(req, res){
   console.log('editing item: ', req.params.itemName);
     db.list.update({
       amount: req.body.amount},{
@@ -98,8 +99,21 @@ router.put('/:itemName/edit', function(req, res){
     }).catch(function(error) {
         res.status(400).render('main/404');
     });
+  });
 
-
+//return HTML form for editing an item
+app.get('/edit/:itemName', function(req, res){
+  console.log('editing item' + req.params.itemName);
+      db.list.find({
+        where: { itemName: req.params.itemName }
+      }).then(function(item) {
+      if (!item) throw Error();
+      res.render('lists/edit', {item: item});
+    }).catch(function(error) {
+      res.status(400).render('main/404');
+    });
+});
+ 
 
 
 

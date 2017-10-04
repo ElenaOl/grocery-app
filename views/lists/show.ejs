@@ -8,7 +8,7 @@
     <small><%= item.amount %></small>
     <!-- <small><%= item.userId %></small> -->
   </h2>
-  <a href="/list/<%= item.itemName %>/edit" class="btn btn-info glyphicon glyphicon-edit"> Edit amount</a>
+  <a href="/list/edit/<%= item.itemName %>" class="btn btn-info glyphicon glyphicon-edit"> Edit amount</a>
   <a href="/list" deleteUrl="/list/<%= item.itemName %>" class="btn btn-danger glyphicon glyphicon-trash delete-btn"></a>
   
 </div>
