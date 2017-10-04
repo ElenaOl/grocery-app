@@ -1,11 +1,11 @@
 <h1><%= item %></h1>
+<h3>Nutritial information</h3>
 
-<p>The amount of calories in <%= item %> are: <%=details.calories %></p>
-<p>The total fat value of <%= item %> is: <%=details.totalNutrients.FAT.quantity %> <%=details.totalNutrients.FAT.unit %></p>
-<p>The total sugars value in <%= item %> are: <%=details.totalNutrients.SUGAR.quantity %> <%=details.totalNutrients.SUGAR.unit %></p>
-<p>The total value of carbohydrates in <%= item %> are: <%=details.totalNutrients.CHOCDF.quantity %> <%=details.totalNutrients.CHOCDF.unit %></p>
-
-
-
+<p>Calories: <%=details.calories %> kcal</p>
+<p>Fat: <%=details.totalNutrients.FAT.quantity.toFixed(2) %> <%=details.totalNutrients.FAT.unit %></p>
+<p>Sugars: <%=details.totalNutrients.SUGAR.quantity.toFixed(2) %> <%=details.totalNutrients.SUGAR.unit %></p>
+<p>Carbohydrates: <%=details.totalNutrients.CHOCDF.quantity.toFixed(2) %> <%=details.totalNutrients.CHOCDF.unit %></p>
+<h4>data provided by:</h4> <div id="edamam-badge" data-color="white"></div>
+<script src="https://developer.edamam.com/attribution/badge.js"></script>
 
 
