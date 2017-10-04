@@ -69,30 +69,13 @@ router.get('/:itemName', function(req, res){
           }
         }, 
         function (error, response, body) {
-         // console.log(body);
+         console.log(body);
          res.render('lists/itemdetails', { details: body, item: food });
         }
       )
     }
   );
 
-
-
-
-
-
-
-
-
-  //  db.list.findOne({
-  //     where: { itemName: req.params.itemName},
-  //     include: [db.user]
-  //  }).then(function(item) {
-  //    if (!item) throw Error();
-  //    res.render('lists/itemdetails', { item: item });
-  //  }).catch(function(error) {
-  //     res.status(400).render('main/404');
-  //   });
 });
 
 //deleting from list
@@ -103,6 +86,18 @@ router.delete('/:itemName', function(req, res){
     where: {itemName: itemToDelete}
   });
 });
+
+router.put('/:itemName/edit', function(req, res){
+  console.log('editing item: ', req.params.itemName);
+    db.list.update({
+      amount: req.body.amount},{
+      where: { itemName: req.params.itemName }
+    }).then(function(item) {
+        if (!item) throw Error();
+        console.log(editeditem);
+    }).catch(function(error) {
+        res.status(400).render('main/404');
+    });
 
 
 
