@@ -70,18 +70,27 @@ router.get('/addItem', function(req, res) {
 });
 
 //display a specific item
-+router.get('/:itemName', function(req, res){
-  +  db.list.findOne({
-  +    where: { itemName: req.params.itemName},
-  +    include: [db.user]
-  +  }).then(function(item) {
-  +    if (!item) throw Error();
-  +    res.render('lists/itemdetails', { item: item });
-  +  }).catch(function(error) {
-  +    res.status(400).render('main/404');
-  +  });
-  +});
-  
+router.get('/:itemName', function(req, res){
+   db.list.findOne({
+      where: { itemName: req.params.itemName},
+      include: [db.user]
+   }).then(function(item) {
+     if (!item) throw Error();
+     res.render('lists/itemdetails', { item: item });
+   }).catch(function(error) {
+      res.status(400).render('main/404');
+    });
+});
+
+//deleting from list
+router.delete('/:itemName', function(req, res){
+  var itemToDelete = req.params.itemName;
+  console.log('I am deleting this item: ', itemToDelete);
+  db.list.destroy({
+    where: {itemName: itemToDelete}
+  });
+});
+
 
 
 
