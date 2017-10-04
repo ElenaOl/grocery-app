@@ -47,7 +47,7 @@ router.get('/addItem', function(req, res) {
 //display a specific item
 router.get('/:itemName', function(req, res){
 
-
+//exporting data from the nutrition database
   var food = req.params.itemName;
   request(
     'http://api.edamam.com/api/food-database/parser?ingr=' + food + '&app_id=63f7abc8&app_key=2738e46d31b312ca0e39c9dca251c866&page=0',
