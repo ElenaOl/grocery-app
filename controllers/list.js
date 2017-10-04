@@ -48,7 +48,7 @@ router.post('/', function(req, res) {
   db.list.create({
     itemName: req.body.itemName,
     amount: req.body.amount,
-    userId: req.body.userId
+    userId: req.user.id
   }).then(function(item){
   //here item is what db returned from create
     console.log('created ', item.itemName);
@@ -76,31 +76,6 @@ router.get('/addItem', function(req, res) {
 
 
 
-// // POST - receive the name of an item and add it to the database
-// router.post('/', function(req, res) {
-//   // add to database, adding raw to a table
-
-//   var itemName = req.body.itemName;
-//   db.list.findOne({
-//     where:{
-//       itemName: itemName
-//     }
-//   }).then(function(item){
-//     //item is the result of my query
-//     if(item === null){
-//       db.list.create({
-//         itemName: itemName
-//       }).then(function(item){
-//         //here item is what db returned from create
-//         console.log('created ', item.itemName);
-//         res.redirect('/list');
-//       });
-//     }else{
-//       console.log('already exist: ', item.itemName);
-//       res.redirect('/list');
-//     }
-//   });
-// });
 
 
 
