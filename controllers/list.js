@@ -102,7 +102,7 @@ router.put('/edit/:itemName', function(req, res){
   });
 
 //return HTML form for editing an item
-app.get('/edit/:itemName', function(req, res){
+router.get('/edit/:itemName', function(req, res){
   console.log('editing item' + req.params.itemName);
       db.list.find({
         where: { itemName: req.params.itemName }
