@@ -3,13 +3,15 @@ require('dotenv').config();
 var express = require('express');
 var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
+var path = require('path');
 var app = express();
 //var cookieParser = require('cookieParser');
 var session = require('express-session');
 var flash = require('connect-flash');
 // require the authorization middleware at the top of the page
 var isLoggedIn = require('./middleware/isLoggedIn');
-
+// this sets a static directory for the views
+app.use(express.static(path.join(__dirname, 'static')));
 
 
 app.set('view engine', 'ejs');
