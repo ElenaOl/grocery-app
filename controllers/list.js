@@ -2,13 +2,11 @@ var express = require('express');
 var request = require('request');
 var router = express.Router();
 var db = require('../models');
-
-
-
+var isLoggedIn = require('../middleware/isLoggedIn');
 
 // GET - return a page with mylist
-router.get('/', function(req, res) {
-  console.log("this is from sessions: ", req.session);
+router.get('/', isLoggedIn, function(req, res) {
+ // console.log("this is from sessions: ", req.session);
    //get everything from list db and render page.
   db.list.findAll().then(function(items) {
     console.log("those are my items from the list: ", items);
@@ -19,14 +17,14 @@ router.get('/', function(req, res) {
 });
 
 // POST /lists - create a new list
-router.post('/', function(req, res) {
+router.post('/', isLoggedIn, function(req, res) {
   db.list.create({
     itemName: req.body.itemName,
     amount: req.body.amount,
     userId: req.user.id
   }).then(function(item){
   //here item is what db returned from create
-    console.log('created ', item.itemName);
+    //console.log('created ', item.itemName);
     res.redirect('/');
   }).catch(function(err) {
     res.status(500).render('error');
@@ -34,7 +32,7 @@ router.post('/', function(req, res) {
 });
 
 // GET /list/addItem - display form for creating new posts
-router.get('/addItem', function(req, res) {
+router.get('/addItem', isLoggedIn, function(req, res) {
   db.list.findAll()
   .then(function() {
     res.render('lists/addItem');
@@ -45,7 +43,7 @@ router.get('/addItem', function(req, res) {
 });
 
 //display a specific item
-router.get('/:itemName', function(req, res){
+router.get('/:itemName', isLoggedIn, function(req, res){
 
 //exporting data from the nutrition database
   var food = req.params.itemName;
@@ -54,6 +52,8 @@ router.get('/:itemName', function(req, res){
     function(error, result, body){
       var answer = JSON.parse(body);
       var foodUrl = answer.hints[0].food.uri;
+      var foodLabel = answer.hints[0].food.label;
+      console.log('#############',foodLabel);
       request.post(
         'https://api.edamam.com/api/food-database/nutrients?app_id=63f7abc8&app_key=2738e46d31b312ca0e39c9dca251c866',
         { json: 
@@ -69,7 +69,7 @@ router.get('/:itemName', function(req, res){
           }
         }, 
         function (error, response, body) {
-         console.log(body);
+        // console.log(body);
          res.render('lists/itemdetails', { details: body, item: food });
         }
       )
@@ -79,17 +79,17 @@ router.get('/:itemName', function(req, res){
 });
 
 //deleting from list
-router.delete('/:itemName', function(req, res){
+router.delete('/:itemName', isLoggedIn, function(req, res){
   var itemToDelete = req.params.itemName;
-  console.log('I am deleting this item: ', itemToDelete);
+  //console.log('I am deleting this item: ', itemToDelete);
   db.list.destroy({
     where: {itemName: itemToDelete}
   });
 });
 
 //editing item
-router.put('/edit/:itemName', function(req, res){
-  console.log('editing item: ', req.params.itemName);
+router.put('/edit/:itemName', isLoggedIn, function(req, res){
+ // console.log('editing item: ', req.params.itemName);
     db.list.update({
       amount: req.body.amount},{
       where: { itemName: req.params.itemName }
@@ -102,8 +102,8 @@ router.put('/edit/:itemName', function(req, res){
   });
 
 //return HTML form for editing an item
-router.get('/edit/:itemName', function(req, res){
-  console.log('editing item' + req.params.itemName);
+router.get('/edit/:itemName', isLoggedIn, function(req, res){
+  //console.log('editing item' + req.params.itemName);
       db.list.find({
         where: { itemName: req.params.itemName }
       }).then(function(item) {
