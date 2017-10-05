@@ -51,9 +51,17 @@ router.get('/:itemName', isLoggedIn, function(req, res){
     'http://api.edamam.com/api/food-database/parser?ingr=' + food + '&app_id=63f7abc8&app_key=2738e46d31b312ca0e39c9dca251c866&page=0',
     function(error, result, body){
       var answer = JSON.parse(body);
-      var foodUrl = answer.hints[0].food.uri;
-      var foodLabel = answer.hints[0].food.label;
-      console.log('#############',foodLabel);
+      console.log(answer);
+      var hints = answer.hints;
+      var foodUrl = hints.map(function(hint){
+       return foodUrl = hint.food.uri;   
+      });
+      console.log('food url: ',foodUrl);
+      // var foodLabel = hints.map(function(hint){
+      //   return foodLabel = hint.food.label;   
+      //  });
+      // console.log('food label: ',foodLabel);   
+      
       request.post(
         'https://api.edamam.com/api/food-database/nutrients?app_id=63f7abc8&app_key=2738e46d31b312ca0e39c9dca251c866',
         { json: 
@@ -62,7 +70,7 @@ router.get('/:itemName', isLoggedIn, function(req, res){
             "ingredients": [
               {
                 "quantity": 1,
-                "measureURI": "http://www.edamam.com/ontologies/edamam.owl#Measure_unit",
+                "measureURI": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
                 "foodURI": foodUrl
               }
             ]
@@ -70,12 +78,19 @@ router.get('/:itemName', isLoggedIn, function(req, res){
         }, 
         function (error, response, body) {
         // console.log(body);
-         res.render('lists/itemdetails', { details: body, item: food });
+         res.render('lists/itemvariety', { hints: hints, item: food });
+         res.render('lists/itemdetails', { hints: hints, item: food, foodUrl: foodUrl });
+         
         }
       )
     }
   );
 
+});
+
+//presenting nutrition information for specific item
+router.get('/list/<%= item.itemName %>/itemdetails', isLoggedIn, function(req, res){
+  res.render('lists/itemdetails', { details: foodUrl, item: food });
 });
 
 //deleting from list

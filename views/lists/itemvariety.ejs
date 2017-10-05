@@ -1,0 +1,13 @@
+<h1>Those are the available <%= item %> variety in the database</h1>
+<h3>please click on individual label for presenting nutrition data for specific type of <%= item %></h3>
+
+
+<ul>
+ <% hints.forEach(function(hint, idx){ %>
+    <li><a href="#"><h4><%= hint.food.label %></h4></a></li>
+ <% }); %>  
+</ul>
+
+<h4>data provided by:</h4> <div id="edamam-badge" data-color="white"></div>
+<script src="https://developer.edamam.com/attribution/badge.js"></script>
+
