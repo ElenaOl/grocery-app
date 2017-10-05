@@ -79,7 +79,7 @@ router.get('/:itemName', isLoggedIn, function(req, res){
         function (error, response, body) {
         // console.log(body);
          res.render('lists/itemvariety', { hints: hints, item: food });
-         res.render('lists/itemdetails', { hints: hints, item: food, foodUrl: foodUrl });
+         //res.render('lists/itemdetails', { hints: hints, foodUrl: foodUrl });
          
         }
       )
