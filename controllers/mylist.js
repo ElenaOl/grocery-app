@@ -26,7 +26,7 @@ router.get('/', isLoggedIn, function(req, res) {
       userId: req.user.id
     }).then(function(name){
       //here list is what db returned from create
-    console.log('created mylist: ', name.myListName);
+    console.log('created mylist: ', name);
     res.redirect('/mylist');
     })
   })
