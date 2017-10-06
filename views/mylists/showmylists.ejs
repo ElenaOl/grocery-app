@@ -1,0 +1,23 @@
+<h1>Here are your previously created lists</h1>
+
+      <% names.forEach(function(name) { %>
+        <div class="well">
+            <h2><a href=""><%= name.myListName %></a></h2>
+         
+          
+        </div>
+        <% }); %>
+
+      
+      <form action="/mylist" method="POST">
+        <div class="form-group">
+          <label for="mylist">Add New Grocery List</label>
+          <input type="text" class="form-control" id="mylist" name="mylist"required>
+        </div>
+      
+        <input type="submit" class="btn btn-primary">
+      </form>
+      
+      
+      
+      

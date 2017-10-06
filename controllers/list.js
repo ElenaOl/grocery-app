@@ -4,7 +4,7 @@ var router = express.Router();
 var db = require('../models');
 var isLoggedIn = require('../middleware/isLoggedIn');
 
-// GET - return a page with mylist
+// GET - return a page with item list
 router.get('/', isLoggedIn, function(req, res) {
  // console.log("this is from sessions: ", req.session);
    //get everything from list db and render page.
@@ -63,7 +63,7 @@ router.get('/:itemName', isLoggedIn, function(req, res){
       // console.log('food label: ',foodLabel);   
       
       request.post(
-        'https://api.edamam.com/api/food-database/nutrients?app_id=63f7abc8&app_key=2738e46d31b312ca0e39c9dca251c866',
+        'https://api.edamam.com/api/food-database/nutrients?app_id=63f7abc8&app_API_KEY',
         { json: 
           {
             "yield": 1,

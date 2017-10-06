@@ -1,21 +1,15 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('lists', {
+    return queryInterface.createTable('mylists', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      itemName: {
+      myListName: {
         type: Sequelize.STRING
-      },
-      amount: {
-        type: Sequelize.INTEGER
-      },
-      myListId: {
-        type: Sequelize.INTEGER
       },
       userId: {
         type: Sequelize.INTEGER
@@ -31,6 +25,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('lists');
+    return queryInterface.dropTable('mylists');
   }
 };
