@@ -4,13 +4,16 @@ var router = express.Router();
 var db = require('../models');
 var isLoggedIn = require('../middleware/isLoggedIn');
 
+
+//router.get()
+
 // GET - return a page with myList
 router.get('/', isLoggedIn, function(req, res) {
     // console.log("this is from sessions: ", req.session);
       //get everything from myList db and render page.
      db.list.findAll().then(function(names) {
        console.log("those are my lists: ", names);
-       res.render('myLists/showmyLists', {names: names});
+       res.render('lists/showlists', {names: names});
      }).catch(function(err) {
        res.status(500).render('error');
      });
@@ -25,7 +28,7 @@ router.get('/:listId', isLoggedIn, function(req, res) {
      where: {listId: req.params.listId}
    }).then(function(items) {
      console.log("those are my items from the list: ", items);
-     res.render('lists/show', {items: items, listId: req.params.listId});
+     res.render('items/show', {items: items, listId: req.params.listId});
    }).catch(function(err) {
      res.status(500).render('error');
    });

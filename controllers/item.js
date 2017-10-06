@@ -5,7 +5,7 @@ var db = require('../models');
 var isLoggedIn = require('../middleware/isLoggedIn');
 
 
-// POST /lists - create a new list
+// POST /items - create a new item
 router.post('/:listId', isLoggedIn, function(req, res) {
   db.item.create({
     itemName: req.body.itemName,
@@ -22,7 +22,7 @@ router.post('/:listId', isLoggedIn, function(req, res) {
 
 // GET /list/addItem - display form for creating new posts
 router.get('/addItem/:listId', isLoggedIn, function(req, res) {
-  res.render('lists/addItem', {listId: req.params.listId});
+  res.render('items/addItem', {listId: req.params.listId});
 });
 
 //display a specific item
@@ -61,7 +61,7 @@ router.get('/:itemName', isLoggedIn, function(req, res){
         }, 
         function (error, response, body) {
         // console.log(body);
-         res.render('lists/itemvariety', { hints: hints, item: food });
+         res.render('items/itemvariety', { hints: hints, item: food });
          //res.render('lists/itemdetails', { hints: hints, foodUrl: foodUrl });
          
         }
@@ -73,7 +73,7 @@ router.get('/:itemName', isLoggedIn, function(req, res){
 
 //presenting nutrition information for specific item
 router.get('/list/<%= item.itemName %>/itemdetails', isLoggedIn, function(req, res){
-  res.render('lists/itemdetails', { details: foodUrl, item: food });
+  res.render('items/itemdetails', { details: foodUrl, item: food });
 });
 
 //deleting from list
@@ -106,7 +106,7 @@ router.get('/edit/:itemName', isLoggedIn, function(req, res){
         where: { itemName: req.params.itemName }
       }).then(function(item) {
       if (!item) throw Error();
-      res.render('lists/edit', {item: item});
+      res.render('items/edit', {item: item});
     }).catch(function(error) {
       res.status(400).render('main/404');
     });
