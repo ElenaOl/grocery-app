@@ -61,8 +61,8 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 
 app.use('/auth', require('./controllers/auth'));
+app.use('/item', require('./controllers/item'));
 app.use('/list', require('./controllers/list'));
-app.use('/mylist', require('./controllers/mylist'));
 
 
 var server = app.listen(process.env.PORT || 3000);

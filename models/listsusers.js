@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var mylistsUsers = sequelize.define('mylistsUsers', {
-    userId: DataTypes.INTEGER,
-    mylistId: DataTypes.INTEGER
+  var listsUsers = sequelize.define('listsUsers', {
+    listId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
@@ -10,5 +10,5 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  return mylistsUsers;
+  return listsUsers;
 };

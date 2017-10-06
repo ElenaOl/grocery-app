@@ -1,16 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var list = sequelize.define('list', {
-    itemName: DataTypes.STRING,
-    amount: DataTypes.INTEGER,
-    myListId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    listName: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        models.list.belongsTo(models.user);
-        models.list.belongsTo(models.mylist);
+        models.list.belongsToMany(models.user, {through: "listsUsers"});
+        models.list.hasMany(models.item);
       }
     }
   });

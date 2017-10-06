@@ -2,17 +2,17 @@
 
       <% names.forEach(function(name) { %>
         <div class="well">
-            <h2><a href=""><%= name.myListName %></a></h2>
+            <h2><a href="/list/<%=name.id%>"><%= name.listName %></a></h2>
          
           
         </div>
         <% }); %>
 
       
-      <form action="/mylist" method="POST">
+      <form action="/list" method="POST">
         <div class="form-group">
-          <label for="myListName">Add New Grocery List</label>
-          <input type="text" class="form-control" id="mylist" name="myListName"required>
+          <label for="listName">Add New Grocery List</label>
+          <input type="text" class="form-control" id="list" name="listName"required>
         </div>
       
         <input type="submit" class="btn btn-primary">

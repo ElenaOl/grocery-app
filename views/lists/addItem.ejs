@@ -1,6 +1,6 @@
-<h1>Add new item to your list</h1>
+<h1>Add new item to your list <%=listId%></h1>
 
-<form action="/list" method="POST" autocomplete="on">
+<form action="/item/<%=listId%>" method="POST" autocomplete="on">
   <div class="form-group">
     <label for="itemName">Item name</label>
     <input type="text" class="form-control" id="itemName" name="itemName" required>
