@@ -11,13 +11,17 @@ var isLoggedIn = require('../middleware/isLoggedIn');
 router.get('/', isLoggedIn, function(req, res) {
     // console.log("this is from sessions: ", req.session);
       //get everything from myList db and render page.
-     db.list.findAll().then(function(names) {
-       console.log("those are my lists: ", names);
-       res.render('lists/showlists', {names: names});
+     db.user.findOne({
+       where: {id: req.user.id},
+     }).then(function(user) {
+        user.getLists().then(function(lists) {
+            console.log("those are my lists: ", lists);
+            res.render('lists/showlists', {names: lists});
+        });
      }).catch(function(err) {
-       res.status(500).render('error');
+        res.status(500).render('error');
      });
-   });
+});
    
 
    // GET - return a page with item list
@@ -36,14 +40,19 @@ router.get('/:listId', isLoggedIn, function(req, res) {
   
   
   
-  router.post('/', function(req,res){
-    db.list.create({
-      listName: req.body.listName,
-    }).then(function(name){
-      //here list is what db returned from create
-    console.log('created list: ', name);
-    res.redirect('/list');
-    })
-  })
+router.post('/', isLoggedIn, function(req,res){
+  db.list.create(
+    {listName: req.body.listName}
+  ).then(function(list){
+    db.user.findOne(
+      {where: {id: req.user.id}}
+    ).then(function(user) {
+      list.addUser(user).then(function(listUser){
+        console.log('created list: ', req.body.listName);
+        res.redirect('/list');
+      });
+    });
+  });    
+});
 
 module.exports = router;   
