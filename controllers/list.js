@@ -39,7 +39,7 @@ router.get('/:listId', isLoggedIn, function(req, res) {
  });
   
   
-  
+//creates new list by specific user  
 router.post('/', isLoggedIn, function(req,res){
   db.list.create(
     {listName: req.body.listName}
@@ -53,6 +53,33 @@ router.post('/', isLoggedIn, function(req,res){
       });
     });
   });    
+});
+
+//adds additional user to specific list
+router.put('/:listId/user/:userId', isLoggedIn, function(req,res){
+  db.list.findOne(
+    {where: {id: req.params.listId}}
+  ).then(function(list){
+    db.user.findOne(
+      {where: {id: req.params.userId}} 
+    ).then(function(user) {
+      list.addUser(user);
+    });
+  });
+});
+
+//shows list of user for posibility to add another user
+router.get('/:listId/share', isLoggedIn, function(req,res){
+  db.user.findAll({}).then(function(users) {
+    console.log("those are my users from the database: ", users);
+    db.list.findOne(
+      {where: {id: req.params.listId}}
+    ).then(function(list){
+      res.render('items/sharelist', {users:users, list:list});
+    });
+  }).catch(function(err) {
+    res.status(500).render('error');
+  });
 });
 
 module.exports = router;   

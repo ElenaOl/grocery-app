@@ -1,0 +1,32 @@
+<h1>Share this list with another user </h1>
+<h2>Your list name is: <%=list.listName%></h2>
+
+<% users.forEach(function(user) { %>
+    <div class="well">
+        <h3><%= user.name %></h3> 
+        <a type="button" class="btn btn-primary" editUrl="/list/<%=list.id%>/user/<%=user.id%>">Share with this user</a>
+    </div>
+<% }); %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+ integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+ crossorigin="anonymous"></script>
+<script>
+    // listen for a "submit" event for the edit page. the edit form will live
+    $('[type=button]').on('click', function(e) {
+        //e.preventDefault();
+        var updateUrl = $(this).attr('editUrl');
+        //will take form data and put in list data
+        // at the path GET /list/edit/:itemName. Use AJAX to send a PUT request to the
+        // appropriate URL
+        $.ajax({
+            method: 'PUT',
+            url: updateUrl,
+        }).done(function(data) {
+        // get data returned from the PUT route
+        console.log(data);
+        });
+    });
+</script>
