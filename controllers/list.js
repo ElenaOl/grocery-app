@@ -23,6 +23,14 @@ router.get('/', isLoggedIn, function(req, res) {
      });
 });
    
+//deleting from list
+router.delete('/:listId', isLoggedIn, function(req, res){
+  var listToDelete = req.params.listId;
+  //console.log('I am deleting this list: ', listToDelete);
+  db.list.destroy({
+    where: {id: listToDelete}
+  });
+});
 
    // GET - return a page with item list
 router.get('/:listId', isLoggedIn, function(req, res) {
