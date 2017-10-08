@@ -1,18 +1,26 @@
-<h1><%= item %></h1>
-<h3>Nutritial information for 1 serving</h3>
-
-
-<ul>
-        <% hints.forEach(function(hint, idx){ %>
-            hint.food.label
-        <% }); %>  
-
-
+<h1><%= food %></h1>
+<h3>Nutritial information for 1 pound</h3>
 
 <p>Calories: <%=details.calories %> kcal</p>
+
+<% if(details.totalNutrients.FAT){%>
 <p>Fat: <%=details.totalNutrients.FAT.quantity.toFixed(2) %> <%=details.totalNutrients.FAT.unit %></p>
+<%}else{%>
+<p>Fat: N/A</p>
+<%}%>
+
+<% if(details.totalNutrients.SUGAR){%>
 <p>Sugars: <%=details.totalNutrients.SUGAR.quantity.toFixed(2) %> <%=details.totalNutrients.SUGAR.unit %></p>
+<%}else{%>
+<p>Sugars: N/A</p>
+<%}%>
+
+<% if(details.totalNutrients.CHOCDF){%>
 <p>Carbohydrates: <%=details.totalNutrients.CHOCDF.quantity.toFixed(2) %> <%=details.totalNutrients.CHOCDF.unit %></p>
+<%}else{%>
+<p>Carbohydrates: N/A</p>
+<%}%>
+
 
 
 <h4>data provided by:</h4> <div id="edamam-badge" data-color="white"></div>

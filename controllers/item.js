@@ -27,53 +27,39 @@ router.get('/addItem/:listId', isLoggedIn, function(req, res) {
 
 //display a specific item
 router.get('/:itemName', isLoggedIn, function(req, res){
-
-//exporting data from the nutrition database
+  //exporting data from the nutrition database
   var food = req.params.itemName;
   request(
     'http://api.edamam.com/api/food-database/parser?ingr=' + food + '&app_id=63f7abc8&app_key=2738e46d31b312ca0e39c9dca251c866&page=0',
     function(error, result, body){
       var answer = JSON.parse(body);
-      console.log(answer);
+      console.log("this is my answer from api return ######################", answer);
       var hints = answer.hints;
-      var foodUrl = hints.map(function(hint){
-       return foodUrl = hint.food.uri;   
-      });
-      console.log('food url: ',foodUrl);
-      // var foodLabel = hints.map(function(hint){
-      //   return foodLabel = hint.food.label;   
-      //  });
-      // console.log('food label: ',foodLabel);   
-      
-      request.post(
-        'https://api.edamam.com/api/food-database/nutrients?app_id=63f7abc8&app_API_KEY',
-        { json: 
-          {
-            "yield": 1,
-            "ingredients": [
-              {
-                "quantity": 1,
-                "measureURI": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
-                "foodURI": foodUrl
-              }
-            ]
-          }
-        }, 
-        function (error, response, body) {
-        // console.log(body);
-         res.render('items/itemvariety', { hints: hints, item: food });
-         //res.render('lists/itemdetails', { hints: hints, foodUrl: foodUrl });
-         
-        }
-      )
+      res.render('items/itemvariety', { hints: hints, item: food });
     }
   );
-
 });
 
 //presenting nutrition information for specific item
-router.get('/list/<%= item.itemName %>/itemdetails', isLoggedIn, function(req, res){
-  res.render('items/itemdetails', { details: foodUrl, item: food });
+router.get('/details/:itemName/:foodId', isLoggedIn, function(req, res){
+  request.post(
+    'https://api.edamam.com/api/food-database/nutrients?app_id=63f7abc8&app_key=2738e46d31b312ca0e39c9dca251c866',
+    { json: 
+      {
+        "yield": 1,
+        "ingredients": [
+          {
+            "quantity": 1,
+            "measureURI": "http://www.edamam.com/ontologies/edamam.owl#Measure_pound",
+            "foodURI": "http://www.edamam.com/ontologies/edamam.owl#" + req.params.foodId
+          }
+        ]
+      }
+    }, 
+    function(error, result, body){
+      res.render('items/itemdetails', { details: body, food: req.params.itemName });
+    }
+  );
 });
 
 //deleting from list

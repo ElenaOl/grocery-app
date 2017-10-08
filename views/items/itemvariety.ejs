@@ -3,10 +3,12 @@
 
 
 <ul>
- <% hints.forEach(function(hint, idx){ %>
-    <li><a href="#"><h4><%= hint.food.label %></h4></a></li>
+ <% hints.forEach(function(hint){ %>
+ <% var foodId = hint.food.uri.split('#')[1]; %>
+    <li><a href="/item/details/<%=hint.food.label%>/<%=foodId%>"><h4><%= hint.food.label %></h4></a></li>
  <% }); %>  
 </ul>
+
 
 <h4>data provided by:</h4> <div id="edamam-badge" data-color="white"></div>
 <script src="https://developer.edamam.com/attribution/badge.js"></script>
