@@ -1,11 +1,11 @@
-<h1>Those are the available <%= item %> variety in the database</h1>
-<h3>please click on individual label for presenting nutrition data for specific type of <%= item %></h3>
+<h3>Those are the available <%= item %> variety in the database</h3>
+<h4>please click on individual label for presenting nutrition data for specific type of <%= item %></h4>
 
 
 <ul>
  <% hints.forEach(function(hint){ %>
  <% var foodId = hint.food.uri.split('#')[1]; %>
-    <li><a href="/item/details/<%=hint.food.label%>/<%=foodId%>"><h4><%= hint.food.label %></h4></a></li>
+    <li><a href="/item/details/<%=hint.food.label%>/<%=foodId%>"><h5><%= hint.food.label %></h5></a></li>
  <% }); %>  
 </ul>
 
@@ -20,15 +20,16 @@
         background: lightgrey;
         background-size:cover;
     }
-    h1, h3 {
+    h3, h4 {
         color: darkblue;
         font-family: serif;
     }
     a {
         font-family: sans-serif;
     }
+    
     .navbar-brand {
-        margin-left: 50px;
+        margin-left: 10px;
         font-weight: bold;
     }
     </style>
