@@ -1,11 +1,16 @@
-<h1>Share <a href="/list/<%=list.id%>"><%=list.listName%></a> with another user </h1>
-<h2>Your list name is: </h2>
+<h3>Share your <a href="/list/<%=list.id%>"><%=list.listName%></a> list with another user </h3>
 
 <% users.forEach(function(user) { %>
-    <div class="well">
-        <h3><%= user.name %></h3> 
+ <div class="container-fluid">
+  <div class="row">
+    <div class="col col-xs-4 col-sm-2 col-md-2 col-lg-2">
+        <h4><%= user.name %></h4> 
+    </div>    
+    <div class="col col-xs-6 col-sm-2 col-md-2 col-lg-2">    
         <a type="button" class="btn btn-primary" editUrl="/list/<%=list.id%>/user/<%=user.id%>">Share with this user</a>
     </div>
+  </div>
+ </div>   
 <% }); %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
@@ -28,3 +33,30 @@
         });
     });
 </script>
+
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url(/img/background.jpg);
+            background-size:cover;
+        }
+        h3, h4 {
+            color: darkblue;
+            text-align: left;
+            font-family: serif;
+        }
+        span {
+            display: inline-block;
+            margin-left: 30px;
+        }
+        
+        .navbar-brand {
+            margin-left: 10px;
+            font-weight: bold;
+            font-family: serif;
+      }
+      .add {
+        margin-bottom: 20px;
+      }
+</style>
