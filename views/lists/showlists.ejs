@@ -3,10 +3,10 @@
     <% names.forEach(function(name) { %>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-3 col-sm-1 col-md-1 col-md-1 col-lg-1">
+          <div class="col-xs-3 col-sm-1 col-md-1 col-lg-1">
             <a href="/list" deleteUrl="/list/<%=name.id%>" class="btn btn-danger glyphicon glyphicon-trash delete-btn"></a>
           </div>
-          <div class="col-xs-9 col-sm-8 col-md-8 col-md-2 col-lg-8">  
+          <div class="col-xs-9 col-sm-8 col-md-8 col-lg-8">  
             <p><a href="/list/<%=name.id%>"><%= name.listName %></a></p>
           </div>
         </div>
