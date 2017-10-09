@@ -35,11 +35,7 @@ _Planning:_
 * As a user, I want to see nutrition values for specific item I added to the list.
 
 _Pseudo coding:_
-Wireframes are available at: 
-
- 
-
-
+planing the flow of the app:
 ![picture](static/img/flowchartapp.png)
 
 _Execution:_ 
@@ -60,3 +56,4 @@ _Execution:_
 _Things I would love to accomplish later:_
 * Adding favorites lists and items
 * Use different API for nutrition values
+* change styling
