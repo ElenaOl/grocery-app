@@ -40,7 +40,7 @@ Wireframes are available at:
  
 
 
-![picture](img/flowchartapp.png)
+![picture](static/img/flowchartapp.png)
 
 _Execution:_ 
 
