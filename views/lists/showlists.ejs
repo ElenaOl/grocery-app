@@ -1,7 +1,7 @@
 <h1>Here are your previously created lists</h1>
 
       <% names.forEach(function(name) { %>
-        <div class="well">
+        <div>
             <h2><a href="/list/<%=name.id%>"><%= name.listName %></a></h2>
             <a href="/list" deleteUrl="/list/<%=name.id%>" class="btn btn-danger glyphicon glyphicon-trash delete-btn"></a>
           
@@ -35,3 +35,17 @@
       </script>
       
       
+<style>
+  h1 {
+  color: darkblue;
+}
+label {
+  font-size: 20px;
+  font-family: sans-serif;
+  color: darkblue;
+  margin-top: 30px;
+}
+#list {
+    width: 70%;
+}
+</style>

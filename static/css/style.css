@@ -1,6 +1,16 @@
 body {
-  background: url('/img/background.jpg');
+  margin: 0;
+  padding: 0;
+  background: url(/img/background.jpg);
   background-size:cover;
 }
 
+
+.alert {
+  width: 70%;
+}
+.navbar-brand {
+  margin-left: 50px;
+  font-weight: bold;
+}
 
