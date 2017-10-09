@@ -2,7 +2,7 @@
  <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <a href="/list/<%=listId%>/share" class="btn btn-success">Share this list with another user</a>
+        <a href="/list/<%=listId%>/share" class="btn btn-info">Share this list with another user</a>
       </div> 
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h3>Grocery List </h3>
@@ -11,7 +11,7 @@
         <h4>To see nutritions values for the items you are adding to the list, please write the items you are adding in plain english, whole word, singular</h4>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <a href="/item/addItem/<%=listId%>" class="btn btn-success">Add Item</a>
+        <a href="/item/addItem/<%=listId%>" class="btn btn-success add">Add Item</a>
       </div>
     </div>
  </div>     
@@ -68,6 +68,9 @@
   .navbar-brand {
   margin-left: 10px;
   font-weight: bold;
+}
+.add {
+  margin-bottom: 20px;
 }
 </style>
 
