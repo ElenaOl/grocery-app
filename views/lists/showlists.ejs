@@ -1,12 +1,17 @@
-<h1>Here are your previously created lists</h1>
+<h3>Here are your previously created lists</h3>
 
-      <% names.forEach(function(name) { %>
-        <div>
-            <h2><a href="/list/<%=name.id%>"><%= name.listName %></a></h2>
+    <% names.forEach(function(name) { %>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-3 col-sm-1 col-md-1 col-md-1 col-lg-1">
             <a href="/list" deleteUrl="/list/<%=name.id%>" class="btn btn-danger glyphicon glyphicon-trash delete-btn"></a>
-          
+          </div>
+          <div class="col-xs-9 col-sm-8 col-md-8 col-md-2 col-lg-8">  
+            <p><a href="/list/<%=name.id%>"><%= name.listName %></a></p>
+          </div>
         </div>
-        <% }); %>
+      </div>
+    <% }); %>
 
       
       <form action="/list" method="POST">
@@ -36,16 +41,19 @@
       
       
 <style>
-  h1 {
-  color: darkblue;
-}
-label {
-  font-size: 20px;
-  font-family: sans-serif;
-  color: darkblue;
-  margin-top: 30px;
-}
-#list {
-    width: 70%;
-}
+  h3 {
+    color: darkblue;
+  }
+  label {
+    font-size: 20px;
+    font-family: sans-serif;
+    color: darkblue;
+    margin-top: 30px;
+  }
+  #list {
+      width: 70%;
+  }
+  p {
+    font-size: 30px;
+  }
 </style>
