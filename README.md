@@ -14,13 +14,15 @@
 * Bootstrap
 * Node.js
 * npm
-* Restfull
+* RESTful
 * Sequelize
 * Auth
 
 # Installation instructions #
-npm install 
-npm run
+* Run `npm install` to install dependencies
+* Use `nodemon` to start your application
+
+* Review this project on <a href="https://grocery-app-eo.herokuapp.com/">Heroku</a>
 
 # Approach taken: #
 
