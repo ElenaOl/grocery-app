@@ -19,9 +19,9 @@
 * Auth
 
 # Installation instructions #
+npm install 
+npm run
 
-Just load the html and enjoy the game!
- 
 # Approach taken: #
 
 _Planning:_
