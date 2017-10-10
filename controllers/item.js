@@ -33,7 +33,6 @@ router.get('/:itemName', isLoggedIn, function(req, res){
     'http://api.edamam.com/api/food-database/parser?ingr=' + food + '&app_id=63f7abc8&app_key=2738e46d31b312ca0e39c9dca251c866&page=0',
     function(error, result, body){
       var answer = JSON.parse(body);
-      console.log("this is my answer from api return ######################", answer);
       var hints = answer.hints;
       res.render('items/itemvariety', { hints: hints, item: food });
     }
