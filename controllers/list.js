@@ -36,12 +36,12 @@ router.delete('/:listId', isLoggedIn, function(req, res){
 router.get('/:listId', isLoggedIn, function(req, res) {
   // console.log("this is from sessions: ", req.session);
     //get everything from list db and render page.
-  db.item.findAll({
-    where: {listId: req.params.listId}
-  }).then(function(items) {
-    db.list.findOne({
-      where: {id: req.params.listId}
-    }).then(function(list) {
+  db.item.findAll(
+    {where: {listId: req.params.listId}}
+  ).then(function(items) {
+    db.list.findOne(
+      {where: {id: req.params.listId}}
+    ).then(function(list) {
       // console.log("this is list name ################", list.listName);
       // console.log("those are my items from the list: ", items);
       res.render('items/show', {items: items, listId: req.params.listId, listName: list.listName});
@@ -81,18 +81,27 @@ router.put('/:listId/user/:userId', isLoggedIn, function(req,res){
   });
 });
 
-//shows list of user for posibility to add another user
+//shows users that can be added to watch the list
 router.get('/:listId/share', isLoggedIn, function(req,res){
-  db.user.findAll({}).then(function(users) {
-    console.log("those are my users from the database: ", users);
-    db.list.findOne(
-      {where: {id: req.params.listId}}
-    ).then(function(list){
-      res.render('items/sharelist', {users:users, list:list});
+  //find all users for current list
+  db.list.find(
+    {where: {id: req.params.listId},
+    include: [db.user]}
+  ).then(function(list) {
+    //get only ids of the users for current list
+    var usersToExclude = list.users.map(function(user){
+      return user.id;
     });
-  }).catch(function(err) {
-    res.status(500).render('error');
-  });
+    //get all users exept for the ones already have permission for the list
+    db.user.findAll({
+      where: {id: {$notIn: usersToExclude}} 
+    }).then(function(users) {
+      res.render('items/sharelist', {users:users, list:list});
+    }).catch(function(err) {
+      res.status(500).render('error');
+    });
+  });  
 });
+
 
 module.exports = router;   
