@@ -35,9 +35,9 @@ _Planning:_
 * As a user, I want to see nutrition values for specific item I added to the list.
 
 _Pseudo coding:_
-planing the flow of the app:
+_planing the flow of the app:_
 ![picture](static/img/flowchartapp.png)
-planing the routes:
+_planing the routes:_
 ![picture](static/img/routes.png)
 
 _Execution:_ 
