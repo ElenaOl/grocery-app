@@ -13,7 +13,7 @@
 * jQuery
 * Bootstrap
 * Node.js
-* nmp
+* npm
 * Restfull
 * Sequelize
 * Auth
