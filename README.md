@@ -37,6 +37,7 @@ _Planning:_
 _Pseudo coding:_
 _planing the flow of the app:_
 ![picture](static/img/flowchartapp.png)
+
 _planing the routes:_
 ![picture](static/img/routes.png)
 
