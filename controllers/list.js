@@ -7,10 +7,10 @@ var isLoggedIn = require('../middleware/isLoggedIn');
 
 //router.get()
 
-// GET - return a page with myList
+// GET - return a page with lists
 router.get('/', isLoggedIn, function(req, res) {
     // console.log("this is from sessions: ", req.session);
-      //get everything from myList db and render page.
+      //get everything from lists db and render page.
      db.user.findOne({
        where: {id: req.user.id},
      }).then(function(user) {
@@ -36,18 +36,23 @@ router.delete('/:listId', isLoggedIn, function(req, res){
 router.get('/:listId', isLoggedIn, function(req, res) {
   // console.log("this is from sessions: ", req.session);
     //get everything from list db and render page.
-   db.item.findAll({
-     where: {listId: req.params.listId}
-   }).then(function(items) {
-     console.log("those are my items from the list: ", items);
-     res.render('items/show', {items: items, listId: req.params.listId});
-   }).catch(function(err) {
-     res.status(500).render('error');
-   });
- });
+  db.item.findAll({
+    where: {listId: req.params.listId}
+  }).then(function(items) {
+    db.list.findOne({
+      where: {id: req.params.listId}
+    }).then(function(list) {
+      // console.log("this is list name ################", list.listName);
+      // console.log("those are my items from the list: ", items);
+      res.render('items/show', {items: items, listId: req.params.listId, listName: list.listName});
+    }).catch(function(err) {
+      res.status(500).render('error');
+    });
+  });  
+});
   
   
-//creates new list by specific user  
+//creates new list for specific user  
 router.post('/', isLoggedIn, function(req,res){
   db.list.create(
     {listName: req.body.listName}
