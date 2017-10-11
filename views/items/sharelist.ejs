@@ -7,7 +7,7 @@
         <h4><%= user.name %></h4> 
     </div>    
     <div class="col col-xs-6 col-sm-2 col-md-2 col-lg-2">    
-        <a type="button" class="btn btn-primary" editUrl="/list/<%=list.id%>/user/<%=user.id%>">Share with this user</a>
+        <a type="button" href= "/list/<%=list.id%>/share"class="btn btn-primary" editUrl="/list/<%=list.id%>/user/<%=user.id%>">Share with this user</a>
     </div>
   </div>
  </div>   
@@ -21,7 +21,7 @@
 <script>
    
     $('[type=button]').on('click', function(e) {
-        //e.preventDefault();
+        e.preventDefault();
         var updateUrl = $(this).attr('editUrl');
         
         $.ajax({
@@ -30,6 +30,7 @@
         }).done(function(data) {
         // get data returned from the PUT route
         console.log(data);
+        location.reload();
         });
     });
 </script>

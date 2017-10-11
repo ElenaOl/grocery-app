@@ -77,6 +77,7 @@ router.put('/:listId/user/:userId', isLoggedIn, function(req,res){
       {where: {id: req.params.userId}} 
     ).then(function(user) {
       list.addUser(user);
+      res.send("OK");
     });
   });
 });

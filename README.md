@@ -22,7 +22,7 @@
 * Run `npm install` to install dependencies
 * Use `nodemon` to start your application
 
-* Review this project on <a href="https://grocery-app-eo.herokuapp.com/">Heroku</a>
+* View this project on <a href="https://grocery-app-eo.herokuapp.com/">Heroku</a>
 
 # Approach taken: #
 
